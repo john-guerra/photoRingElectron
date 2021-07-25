@@ -1,0 +1,25 @@
+{
+  "name": "photoRingElectron",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^13.1.6",
+    "eslint": "^7.30.0",
+    "eslint-config-prettier": "^8.3.0",
+    "prettier": "^2.3.2"
+  },
+  "dependencies": {
+    "exif-js": "^2.3.0",
+    "mysql": "^2.18.1",
+    "sqlite3": "^5.0.2",
+    "tedious": "^11.2.0"
+  }
+}
