@@ -26,12 +26,7 @@ const { contextBridge, ipcRenderer } = require("electron");
 
 var sqlite3 = require("sqlite3").verbose();
 // eslint-disable-next-line no-unused-vars
-var db = new sqlite3.Database("mydb.db",(err)=>{
-  if(err){
-    return console.error(err.message);
-  }
-  console.log("connected to sqlite");
-});
+
 
 
 contextBridge.exposeInMainWorld("api", {
@@ -58,6 +53,23 @@ contextBridge.exposeInMainWorld("api", {
       }
       console.log("connected to sqlite");
     });
+
+    db.serialize(function () {
+      console.log("hi there");
+      db.run("CREATE TABLE IF NOT EXISTS photoring (info TEXT)");
+      // eslint-disable-next-line no-unused-vars
+      var stmt = db.prepare("INSERT INTO photoring VALUES (?)");
+      for (var i = 0; i < 1; i++) {
+        // eslint-disable-next-line no-undef
+        stmt.run("Ipsum " + exifData["DateTime"]);
+      }
+      stmt.finalize();
+      db.each("SELECT rowid AS id, info FROM photoring", function(err, row) {
+        console.log(row.id + ": " + row.info);
+      });
+
+    });
+    db.close();
     // db.serialize(function() {
     //   db.run("CREATE TABLE if not exists lorem (info TEXT)");
     //
