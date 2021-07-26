@@ -3,6 +3,7 @@ window.api.receive("fromMain", (data) => {
 });
 window.api.send("toMain", "some data");
 
+
 function getExif(im_file) {
   // eslint-disable-next-line no-undef
   EXIF.getData(im_file, function() {
@@ -16,6 +17,7 @@ function getExif(im_file) {
   });
 }
 
+
 function renderImages(filesList) {
   const target = document.querySelector("#target");
 
@@ -27,7 +29,11 @@ function renderImages(filesList) {
     const img = new Image();
     img.src = file.path;
     img.style["max-width"] = "100px";
+
     getExif(file);
+
+
+
     target.appendChild(img);
 
     // const contents = fs.readFileSync(file.path);

@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
-// eslint-disable-next-line no-unused-vars
+
+
 const fs = require("fs");
 
 function createWindow() {
@@ -9,8 +10,10 @@ function createWindow() {
     width: 1200,
     height: 800,
     webPreferences: {
+
+
       nodeIntegration: false,
-      // nodeIntegrationInWorker: true,
+
       preload: path.join(__dirname, "preload.js"),
     },
   });
