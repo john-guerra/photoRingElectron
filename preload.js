@@ -17,4 +17,20 @@ contextBridge.exposeInMainWorld("api", {
       ipcRenderer.on(channel, (event, ...args) => func(...args));
     }
   },
+
+  tfObjectDetection: (img) => {
+    (async () => {
+      // Load the model.
+      console.log("Loading TFMODEL");
+      const model = await cocoSsd.load();
+
+      // Classify the image.
+      console.log("Feeding in the photo");
+      const predictions = await model.detect(img);
+
+      // console.log("Predictions: ");
+      console.log(predictions);
+    })();
+
+  }
 });

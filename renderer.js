@@ -17,7 +17,8 @@ function renderImages(filesList) {
 
     target.appendChild(img);
 
-    // const contents = fs.readFileSync(file.path);
+    //Tensorflow Object Detection
+    window.api.tfObjectDetection(img);
 
     console.log(file.path, " loaded");
 
