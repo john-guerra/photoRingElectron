@@ -11,9 +11,14 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@tensorflow/tfjs-backend-webgl": "^3.8.0",
     "electron": "^13.1.6",
     "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
     "prettier": "^2.3.2"
+  },
+  "dependencies": {
+    "@tensorflow-models/coco-ssd": "^2.2.2",
+    "@tensorflow/tfjs-backend-cpu": "^3.8.0"
   }
 }
