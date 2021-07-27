@@ -2,7 +2,7 @@ const { contextBridge, ipcRenderer } = require("electron");
 require("@tensorflow/tfjs-backend-cpu");
 require("@tensorflow/tfjs-backend-webgl");
 var cocoSsd = require("@tensorflow-models/coco-ssd");
-var sqlite3 = require("sqlite3").verbose();
+// var sqlite3 = require("sqlite3").verbose();
 
 // Expose protected methods that allow the renderer process to use
 // the ipcRenderer without exposing the entire object

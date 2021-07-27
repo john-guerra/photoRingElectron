@@ -2,15 +2,14 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta
+<!--     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
+      content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net/npm/@tensorflow/tfjs https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"
     />
     <meta
       http-equiv="X-Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
-    />
+      content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net/npm/@tensorflow/tfjs https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"
+    /> -->
     <title>PhotoRING Electron</title>
 
     <style>
@@ -26,11 +25,36 @@
 
     <div id="holder">Drag your file here</div>
 
-
     <h2>Images</h2>
     <div id="target"></div>
 
     <!-- You can also require other files to run in this process -->
     <script src="./renderer.js"></script>
+
+    <img id="img" src="./test.jpg" alt="" width="600px" />
+
+    <!-- Load TensorFlow.js. This is required to use coco-ssd model. -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <!-- Load the coco-ssd model. -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+
+    <!-- Place your code in the script tag below. You can also use an external .js file -->
+    <script>
+      // Notice there is no 'import' statement. 'cocoSsd' and 'tf' is
+      // available on the index-page because of the script tag above.
+
+      const img = document.getElementById("img");
+
+      console.log("loading model");
+
+      // Load the model.
+      cocoSsd.load().then((model) => {
+        console.log("model loaded");
+        // detect objects in the image.
+        model.detect(img).then((predictions) => {
+          console.log("Predictions: ", predictions);
+        });
+      });
+    </script>
   </body>
 </html>
