@@ -12,8 +12,8 @@ function getExif(im_file) {
     var exifData = EXIF.getAllTags(this);
     // var makeAndModel = document.getElementById("makeAndModel");
     // makeAndModel.innerHTML = `${make} ${model}`;
-    console.log("exif data", exifData["ApertureValue"]);
-    window.api.insetExifData(exifData,im_file);
+    console.log(im_file, "render");
+    window.api.insetExifData(exifData,im_file.path);
       
   });
 }
