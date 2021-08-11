@@ -5,6 +5,7 @@ window.api.send("toMain", "some data");
 
 
 function getExif(im_file) {
+
   // eslint-disable-next-line no-undef
   EXIF.getData(im_file, function() {
     // eslint-disable-next-line no-undef
@@ -12,7 +13,7 @@ function getExif(im_file) {
     // var makeAndModel = document.getElementById("makeAndModel");
     // makeAndModel.innerHTML = `${make} ${model}`;
     console.log("exif data", exifData["ApertureValue"]);
-    window.api.insetExifData(exifData);
+    window.api.insetExifData(exifData,im_file);
       
   });
 }

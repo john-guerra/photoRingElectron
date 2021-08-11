@@ -27,36 +27,35 @@ contextBridge.exposeInMainWorld("api", {
   },
 
   ///
-  insetExifData: (exifData) => {  
-    console.log(exifData["DateTime"]);
-    var db = new sqlite3.Database("mydb.db",(err)=>{
-      if(err){
+  insetExifData: (exifData,im_file) => {
+
+
+    var db = new sqlite3.Database("mydb.db", (err) => {
+      if (err) {
         return console.error(err.message);
       }
       console.log("connected to sqlite");
     });
 
     db.serialize(function () {
-      console.log("hi there");
-      db.run("CREATE TABLE IF NOT EXISTS photoring (info TEXT)");
-      // eslint-disable-next-line no-unused-vars
-      var stmt = db.prepare("INSERT INTO photoring VALUES (?)");
+      console.log("checking now" ,im_file.path);
+      db.run("CREATE TABLE IF NOT EXISTS photos (file_path TEXT PRIMARY KEY, fileSize INTEGER, datetime DATETIME,type TEXT, exifid INTEGER, imagewidth INTEGER, imageheight INTEGER,colorspace INTEGER,make TEXT, model TEXT, xresolution REAL, yresolution REAL, ycbrpos INTEGER,ExposureProgram TEXT, exposuretime REAL, fnumber REAL, focallength REAL, shutterspeed REAL, flash TEXT,lightsource TEXT, whitebalance TEXT, exposuremode NUMBER, ISO REAL, brightness REAL, aperturevalue REAL) ");
 
-      console.log("exifData", exifData);
+      //     // eslint-disable-next-line no-unused-vars
+      var stmt = db.prepare("INSERT INTO photos VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
       for (var i = 0; i < 1; i++) {
-        // eslint-disable-next-line no-undef
-        stmt.run("Ipsum " + exifData["DateTime"]);
+        stmt.run(im_file.path, exifData["Size"],exifData["DateTime"],exifData["Type"],exifData["ExifIFDPointer"],exifData["ImageWidth"],exifData["ImageHeight"],exifData["ColorSpace"],exifData["Make"],exifData["Model"],exifData["XResolution"][0],exifData["YResolution"][0],exifData["YCbCrPositioning"],exifData["ExposureProgram"],exifData["ExposureTime"][0],exifData["FNumber"][0],exifData["FocalLength"][0],exifData["ShutterSpeedValue"],exifData["Flash"],exifData["LightSource"],exifData["WhiteBalance"],exifData["ExposureMode"],exifData["ISOSpeedRatings"],exifData["BrightnessValue"],exifData["ApertureValue"][0]);
       }
       stmt.finalize();
-      db.each("SELECT rowid AS id, info FROM photoring", function(err, row) {
-        console.log(row.id + ": " + row.info);
+      db.each("SELECT file_path AS id FROM photos", function(err, row) {
+        console.log(row.id );
       });
-
+    //
     });
     db.close();
-  
-
+    //
+    //
+    // }
+    ///
   },
-  ///
-
 });
