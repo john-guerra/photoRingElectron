@@ -41,6 +41,8 @@ contextBridge.exposeInMainWorld("api", {
       db.run("CREATE TABLE IF NOT EXISTS photoring (info TEXT)");
       // eslint-disable-next-line no-unused-vars
       var stmt = db.prepare("INSERT INTO photoring VALUES (?)");
+
+      console.log("exifData", exifData);
       for (var i = 0; i < 1; i++) {
         // eslint-disable-next-line no-undef
         stmt.run("Ipsum " + exifData["DateTime"]);
