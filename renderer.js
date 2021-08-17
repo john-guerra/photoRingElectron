@@ -13,7 +13,7 @@ function getExif(im_file) {
     // var makeAndModel = document.getElementById("makeAndModel");
     // makeAndModel.innerHTML = `${make} ${model}`;
     console.log(im_file, "render");
-    window.api.insetExifData(exifData,im_file.path);
+    window.api.insetExifData(exifData,im_file);
       
   });
 }
