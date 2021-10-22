@@ -2,7 +2,7 @@
   "name": "photoRingElectron",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "script/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron ."
@@ -11,9 +11,18 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@tensorflow/tfjs-backend-webgl": "^3.9.0",
     "electron": "^13.1.6",
     "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
     "prettier": "^2.3.2"
+  },
+  "dependencies": {
+    "@tensorflow-models/coco-ssd": "^2.2.2",
+    "@tensorflow-models/mobilenet": "^2.1.0",
+    "@tensorflow/tfjs": "^3.9.0",
+    "@tensorflow/tfjs-backend-cpu": "^3.9.0",
+    "@tensorflow/tfjs-node": "^3.9.0",
+    "browserify": "^17.0.0"
   }
 }

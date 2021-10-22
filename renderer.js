@@ -22,6 +22,10 @@ function renderImages(filesList) {
     console.log(file.path, " loaded");
 
     window.api.send("toMain", file.path);
+    window.api.send("totensorflow", file.path);
+    window.api.receive("fromtensorflow", (data) =>
+      console.log(data)
+    );
 
     // break;
   }

@@ -1,6 +1,8 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
-const fs = require("fs");
+const mobilenet = require("@tensorflow-models/mobilenet");
+// const fs = require("fs");
+
 
 function createWindow() {
   // Create the browser window.
@@ -25,9 +27,15 @@ function createWindow() {
     console.log("got message toMain", event, args);
 
     // Send result back to renderer process
-    mainWindow.webContents.send("fromMain", "got it");
+    mainWindow.webContents.send("fromMain", "got 111it");
   });
+
+
+
 }
+
+
+
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -40,7 +48,50 @@ app.whenReady().then(() => {
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
+
+  app.on("open-file", function () {
+    //Tensorflow code
+    async function mobilenetload(imagepath) {
+      const img = new Image();
+      img.src = imagepath;
+      console.log("step 1");
+
+      const model = await mobilenet.load({
+        version: 2,
+        alpha:0.5
+      });
+      console.log("Mobilenet Loaded");
+
+      // Classify the image.
+      const predictions = await model.classify(img);
+
+      console.log("Predictions: ");
+      console.log(predictions);
+      return predictions;
+    }
+
+    ipcMain.on("totensorflow", (event, args) => {
+      console.log(event,args);
+      console.log("Running mobilenet Code");
+      window.send("fromtensorflow", mobilenetload(args));
+    });
+  });
+
+
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
@@ -51,3 +102,5 @@ app.on("window-all-closed", function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+
