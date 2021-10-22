@@ -49,6 +49,7 @@ app.whenReady().then(() => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
 
+  //My attempt to receive image location from renderer and push the result back
   app.on("open-file", function () {
     //Tensorflow code
     async function mobilenetload(imagepath) {

@@ -21,6 +21,7 @@ function renderImages(filesList) {
 
     console.log(file.path, " loaded");
 
+    //my attempt to pass and receive information about image
     window.api.send("toMain", file.path);
     window.api.send("totensorflow", file.path);
     window.api.receive("fromtensorflow", (data) =>
